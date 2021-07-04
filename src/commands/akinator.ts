@@ -2,7 +2,7 @@ import { CommandInteraction, MessageButton, MessageComponentInteraction, Message
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
-import { sliceIntoChunks, progressBar } from 'utils'
+import { sliceIntoChunks, progressBar } from '../utils'
 
 const sleep = promisify(setTimeout)
 
