@@ -14,7 +14,7 @@ export default interface Language {
             right: {
                 title: string
                 description: string
-            },
+            }
             wrong: {
                 title: string
                 description: string

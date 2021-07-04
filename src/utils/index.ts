@@ -1,10 +1,10 @@
 export const sliceIntoChunks = (arr: any[], chunkSize: number) => {
-    const res = [];
+    const res = []
     for (let i = 0; i < arr.length; i += chunkSize) {
-        const chunk = arr.slice(i, i + chunkSize);
-        res.push(chunk);
+        const chunk = arr.slice(i, i + chunkSize)
+        res.push(chunk)
     }
-    return res;
+    return res
 }
 
 export const progressBar = (p: number, l: number = 30) => {

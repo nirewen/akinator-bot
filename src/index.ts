@@ -1,8 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import Discord from 'discord.js'
+import Discord, { ApplicationCommand, ApplicationCommandResolvable } from 'discord.js'
 import dotenv from 'dotenv'
 import JSONdb from 'simple-json-db'
+import { Command } from 'utils/Command'
 
 dotenv.config()
 
@@ -10,9 +11,9 @@ export class Bot extends Discord.Client {
     commands = new Map()
     db = new JSONdb(path.join(__dirname, 'db.json'))
 
-    constructor () {
+    constructor() {
         super({
-            intents: ['GUILDS', 'GUILD_MESSAGES']
+            intents: ['GUILDS', 'GUILD_MESSAGES'],
         })
     }
 
@@ -22,19 +23,31 @@ export class Bot extends Discord.Client {
         for (let file of events) {
             let [name] = file.split('.')
             const { default: event } = require(path.join(__dirname, 'events', file))
-            
+
             this.on(name, (...args) => event(this, ...args))
         }
     }
 
     async initCommands() {
         if (!bot.application?.owner) await bot.application?.fetch()
+
+        bot.application?.commands.set([])
+
         const commands = fs.readdirSync(path.join(__dirname, 'commands'))
 
         for (let file of commands) {
-            let command = require(path.join(__dirname, 'commands', file))
+            let { permissions, ...command }: Command = require(path.join(__dirname, 'commands', file))
 
-            bot.application?.commands.create(command)
+            let cmd = await bot.application?.commands.create(command)
+
+            if (permissions)
+                bot.guilds.cache.forEach(async guild => {
+                    bot.application?.commands.permissions.add({
+                        guild: guild.id,
+                        command: cmd?.id as ApplicationCommandResolvable,
+                        permissions,
+                    })
+                })
 
             this.commands.set(command.name, command)
         }

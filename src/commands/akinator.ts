@@ -11,7 +11,9 @@ const sleep = promisify(setTimeout)
 export const name = 'akinator'
 export const description = 'Play Akinator'
 export async function run(bot: Bot, interaction: CommandInteraction) {
-    const lang: Language = (languages as { [key: string]: Language })[bot.db.get(interaction.user.id) as string | undefined || 'pt']
+    const lang: Language = (languages as { [key: string]: Language })[
+        (bot.db.get(interaction.user.id) as string | undefined) || 'pt'
+    ]
 
     const embed = new MessageEmbed().setColor('YELLOW')
     const successEmbed = new MessageEmbed()
@@ -28,9 +30,10 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     await game.start()
 
-    let buttons = sliceIntoChunks(game.answers.map((label: string, i: number) => 
-        new MessageButton({ customID: `${i}`, label, style: 'PRIMARY'}))
-    , 3)
+    let buttons = sliceIntoChunks(
+        game.answers.map((label: string, i: number) => new MessageButton({ customID: `${i}`, label, style: 'PRIMARY' })),
+        3
+    )
     buttons[1].push(new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '◀️' }))
 
     embed.setTitle(`${lang.texts.question} ${game.currentStep + 1}:`)
@@ -41,18 +44,16 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id && i.message.id === message.id
 
-    const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30E3 })
+    const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
 
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         await i.deferUpdate()
 
-        if (i.customID === 'back')
-            await game.back()
-        else
-            await game.step(i.customID)
+        if (i.customID === 'back') await game.back()
+        else await game.step(i.customID)
 
         if (game.currentStep >= 78 && i.customID === 'continue') {
-            interaction.editReply({ content: null, embeds: [ embed, failEmbed ], components: [] })
+            interaction.editReply({ content: null, embeds: [embed, failEmbed], components: [] })
 
             collector.stop()
             return
@@ -60,7 +61,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
         if (game.progress >= 70 && i.customID !== 'continue') {
             if (i.customID === 'win') {
-                interaction.editReply({ content: null, embeds: [ embed, successEmbed ], components: [] })
+                interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
 
                 return
             }

@@ -11,7 +11,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         .addOptions(
             Object.entries(languages).map(([id, lang]) => ({
                 value: id,
-                label: `${lang.emoji} ${lang.name} - ${lang.native}`
+                label: `${lang.emoji} ${lang.name} - ${lang.native}`,
             }))
         )
 
@@ -19,13 +19,15 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id
 
-    interaction.channel?.awaitMessageComponent({ filter, time: 15000 })
-        .then((i: any) => {
-            let lang = i.values.join(', ')
-            let selected: { emoji: string, name: string, native: string } = (languages as any)[lang]
+    interaction.channel?.awaitMessageComponent({ filter, time: 15000 }).then((i: any) => {
+        let lang = i.values.join(', ')
+        let selected: { emoji: string; name: string; native: string } = (languages as any)[lang]
 
-            interaction.editReply({ content: `Set language to ${selected.emoji} ${selected.name} - ${selected.native}`, components: [] })
-
-            bot.db.set(interaction.user.id, lang)
+        interaction.editReply({
+            content: `Set language to ${selected.emoji} ${selected.name} - ${selected.native}`,
+            components: [],
         })
+
+        bot.db.set(interaction.user.id, lang)
+    })
 }
