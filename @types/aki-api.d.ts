@@ -1,5 +1,5 @@
 declare module 'aki-api' {
-    class Aki {
+    public class Aki {
         public currentStep: number
         public region: string
         public uri: string
@@ -19,5 +19,7 @@ declare module 'aki-api' {
         public back(): Promise<void>
         public win(): Promise<void>
     }
+
+    public const regions: string[]
 }
 
