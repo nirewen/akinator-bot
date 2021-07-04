@@ -10,6 +10,7 @@ Para desfazer uma resposta, clique em Voltar (botão vermelho).
 ## Comandos
 
 /akinator - Inicia um jogo de Akinator
+
 /language - Abre um menu para escolher o idioma do bot (somente por usuário)
 
 ## TODO
