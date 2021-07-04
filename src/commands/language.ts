@@ -1,6 +1,6 @@
 import { CommandInteraction, MessageComponentInteraction, MessageResolvable, MessageSelectMenu } from 'discord.js'
 import { Bot } from 'index'
-import languages from '../utils/languages.json'
+import languages from 'data/languages.json'
 
 export const name = 'language'
 export const description = 'Sets the language of the game for the user'

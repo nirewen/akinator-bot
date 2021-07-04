@@ -2,11 +2,17 @@ import { CommandInteraction, MessageButton, MessageComponentInteraction, Message
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
-import { sliceIntoChunks, progressBar } from '../utils'
-import languages from '../utils/languages.json'
-import Language from 'utils/Language'
+import languages from 'data/languages.json'
+import Language from 'types/Language'
 
 const sleep = promisify(setTimeout)
+
+const progressBar = (p: number, l: number = 30) => {
+    let filled = Math.floor((p * 30) / 100)
+    let rest = 30 - filled
+
+    return `${Number(p.toFixed(2))}% [${'█'.repeat(filled)}${'_'.repeat(rest)}]`
+}
 
 export const name = 'akinator'
 export const description = 'Play Akinator'
@@ -30,11 +36,18 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     await game.start()
 
-    let buttons = sliceIntoChunks(
-        game.answers.map((label: string, i: number) => new MessageButton({ customID: `${i}`, label, style: 'PRIMARY' })),
-        3
-    )
-    buttons[1].push(new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '◀️' }))
+    let buttons = [
+        [
+            new MessageButton({ customID: '0', label: game.answers[0], style: 'PRIMARY', emoji: '861383283321733161' }),
+            new MessageButton({ customID: '1', label: game.answers[1], style: 'PRIMARY', emoji: '861383283015417877' }),
+            new MessageButton({ customID: '3', label: game.answers[3], style: 'PRIMARY', emoji: '861383283144654938' }),
+        ],
+        [
+            new MessageButton({ customID: '2', label: game.answers[2], style: 'PRIMARY', emoji: '861383282981339167' }),
+            new MessageButton({ customID: '4', label: game.answers[4], style: 'PRIMARY', emoji: '861383283110838273' }),
+            new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
+        ],
+    ]
 
     embed.setTitle(`${lang.texts.question} ${game.currentStep + 1}:`)
     embed.setDescription(game.question)
@@ -46,11 +59,17 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
 
+    if (game.currentStep > 0) buttons[1][2].setDisabled(false)
+    else buttons[1][2].setDisabled(true)
+
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         await i.deferUpdate()
 
         if (i.customID === 'back') await game.back()
         else await game.step(i.customID)
+
+        if (game.currentStep > 0) buttons[1][2].setDisabled(false)
+        else buttons[1][2].setDisabled(true)
 
         if (game.currentStep >= 78 && i.customID === 'continue') {
             interaction.editReply({ content: null, embeds: [embed, failEmbed], components: [] })
@@ -78,9 +97,9 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             embed.setImage(answer.absolute_picture_path)
 
             let buttons = [
-                new MessageButton({ customID: 'win', label: lang.texts.yes, style: 'PRIMARY' }),
-                new MessageButton({ customID: 'continue', label: lang.texts.no, style: 'PRIMARY' }),
-                new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '◀️' }),
+                new MessageButton({ customID: 'win', label: lang.texts.yes, style: 'PRIMARY', emoji: '861383283321733161' }),
+                new MessageButton({ customID: 'continue', label: lang.texts.no, style: 'PRIMARY', emoji: '861383283015417877' }),
+                new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
             ]
 
             interaction.editReply({ content: null, embeds: [embed], components: [buttons] })

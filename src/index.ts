@@ -1,9 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import Discord, { ApplicationCommand, ApplicationCommandResolvable } from 'discord.js'
+import Discord, { ApplicationCommandResolvable } from 'discord.js'
 import dotenv from 'dotenv'
 import JSONdb from 'simple-json-db'
-import { Command } from 'utils/Command'
+import { Command } from 'types/Command'
 
 dotenv.config()
 
