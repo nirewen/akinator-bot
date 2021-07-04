@@ -3,22 +3,26 @@ import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
 import { sliceIntoChunks, progressBar } from '../utils'
+import languages from '../utils/languages.json'
+import Language from 'utils/Language'
 
 const sleep = promisify(setTimeout)
 
 export const name = 'akinator'
 export const description = 'Play Akinator'
 export async function run(bot: Bot, interaction: CommandInteraction) {
+    const lang: Language = (languages as { [key: string]: Language })[bot.db.get(interaction.user.id) as string | undefined || 'pt']
+
     const embed = new MessageEmbed().setColor('YELLOW')
     const successEmbed = new MessageEmbed()
-        .setTitle('Excelente! Acertei mais uma vez!')
-        .setDescription('Adorei jogar com você!')
+        .setTitle(lang.texts.guess.right.title)
+        .setDescription(lang.texts.guess.right.description)
         .setColor('GREEN')
     const failEmbed = new MessageEmbed()
-        .setTitle(`Bravo, ${interaction.user.username}!`)
-        .setDescription('Você me venceu!')
+        .setTitle(lang.texts.guess.wrong.title.replace('{username}', interaction.user.username))
+        .setDescription(lang.texts.guess.wrong.description)
         .setColor('RED')
-    const game = new Aki('pt')
+    const game = new Aki(lang.code)
 
     interaction.defer()
 
@@ -27,9 +31,9 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     let buttons = sliceIntoChunks(game.answers.map((label: string, i: number) => 
         new MessageButton({ customID: `${i}`, label, style: 'PRIMARY'}))
     , 3)
-    buttons[1].push(new MessageButton({ customID: 'back', label: 'Voltar', style: 'DANGER' }))
+    buttons[1].push(new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '◀️' }))
 
-    embed.setTitle(`Pergunta ${game.currentStep + 1}:`)
+    embed.setTitle(`${lang.texts.question} ${game.currentStep + 1}:`)
     embed.setDescription(game.question)
     embed.setFooter(progressBar(game.progress, 20))
 
@@ -67,15 +71,15 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
             let [answer] = game.answers
 
-            embed.setTitle(`Esse é o seu personagem?`)
-            embed.setDescription(`**${answer.name}**\n${answer.description}\nClassificado como **#${answer.ranking}**`)
+            embed.setTitle(lang.texts.guess.question)
+            embed.setDescription(`**${answer.name}**\n${answer.description}\n${lang.texts.guess.ranked} **#${answer.ranking}**`)
             embed.setFooter('')
             embed.setImage(answer.absolute_picture_path)
 
             let buttons = [
-                new MessageButton({ customID: 'win', label: 'Sim', style: 'PRIMARY' }),
-                new MessageButton({ customID: 'continue', label: 'Não', style: 'PRIMARY' }),
-                new MessageButton({ customID: 'back', label: 'Voltar', style: 'DANGER' }),
+                new MessageButton({ customID: 'win', label: lang.texts.yes, style: 'PRIMARY' }),
+                new MessageButton({ customID: 'continue', label: lang.texts.no, style: 'PRIMARY' }),
+                new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '◀️' }),
             ]
 
             interaction.editReply({ content: null, embeds: [embed], components: [buttons] })
@@ -83,7 +87,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             return
         }
 
-        embed.setTitle(`Pergunta ${game.currentStep + 1}:`)
+        embed.setTitle(`${lang.texts.question} ${game.currentStep + 1}:`)
         embed.setDescription(game.question)
         embed.setImage('')
         embed.setFooter(progressBar(Number(game.progress), 20))

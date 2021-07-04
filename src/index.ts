@@ -2,11 +2,13 @@ import fs from 'fs'
 import path from 'path'
 import Discord from 'discord.js'
 import dotenv from 'dotenv'
+import JSONdb from 'simple-json-db'
 
 dotenv.config()
 
 export class Bot extends Discord.Client {
     commands = new Map()
+    db = new JSONdb(path.join(__dirname, 'db.json'))
 
     constructor () {
         super({

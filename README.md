@@ -8,4 +8,5 @@ Para responder as perguntas, clique nos botões Sim, Não, Não sei, Provavelmen
 Para desfazer uma resposta, clique em Voltar (botão vermelho).
 
 ## TODO
-- [ ] Adicionar idiomas (em um select bonitinho)
+- [x] Adicionar idiomas (em um select bonitinho)
+- [ ] Traduzir pros outros idiomas

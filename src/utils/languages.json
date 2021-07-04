@@ -1,0 +1,362 @@
+{
+    "ar": {
+        "code": "ar",
+        "emoji": "🇸🇦",
+        "name": "Arabic",
+        "native": "العربية",
+        "texts": {
+            "correct": "تعديل الإجابة",
+            "yes": "Yes",
+            "no": "No",
+            "question": "السؤال رقم",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "cn": {
+        "code": "cn",
+        "emoji": "🇨🇳",
+        "name": "Chinese",
+        "native": "中文",
+        "texts": {
+            "correct": "正确",
+            "yes": "Yes",
+            "no": "No",
+            "question": "问题",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "nl": {
+        "code": "nl",
+        "emoji": "🇳🇱",
+        "name": "Dutch",
+        "native": "Nederlands",
+        "texts": {
+            "correct": "Corrigeer",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Vraag",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "en": {
+        "code": "en",
+        "emoji": "🇬🇧",
+        "name": "English",
+        "native": "English",
+        "texts": {
+            "correct": "Correct",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Question",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "fr": {
+        "code": "fr",
+        "emoji": "🇫🇷",
+        "name": "French",
+        "native": "Français",
+        "texts": {
+            "correct": "Corriger",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Question",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "de": {
+        "code": "de",
+        "emoji": "🇩🇪",
+        "name": "German",
+        "native": "Deutsch",
+        "texts": {
+            "correct": "Verbessern",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Frage",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "il": {
+        "code": "il",
+        "emoji": "🇮🇱",
+        "name": "Hebrew",
+        "native": "עברית",
+        "texts": {
+            "correct": "תיקון",
+            "yes": "Yes",
+            "no": "No",
+            "question": "שאלה",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "it": {
+        "code": "it",
+        "emoji": "🇮🇹",
+        "name": "Italian",
+        "native": "Italiano",
+        "texts": {
+            "correct": "Correggi",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Domanda",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "jp": {
+        "code": "jp",
+        "emoji": "🇯🇵",
+        "name": "Japanese",
+        "native": "日本",
+        "texts": {
+            "correct": "修正する",
+            "yes": "Yes",
+            "no": "No",
+            "question": "質問",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "kr": {
+        "code": "kr",
+        "emoji": "🇰🇷",
+        "name": "Korean",
+        "native": "한국어",
+        "texts": {
+            "correct": "이전 질문",
+            "yes": "Yes",
+            "no": "No",
+            "question": "질문",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "pl": {
+        "code": "pl",
+        "emoji": "🇵🇱",
+        "name": "Polish",
+        "native": "Polski",
+        "texts": {
+            "correct": "Popraw",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Pytanie",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "pt": {
+        "code": "pt",
+        "emoji": "🇵🇹",
+        "name": "Portuguese",
+        "native": "Português",
+        "texts": {
+            "correct": "Corrigir",
+            "yes": "Sim",
+            "no": "Não",
+            "question": "Pergunta",
+            "guess": {
+                "question": "Esse é o seu personagem?",
+                "ranked": "Classificado",
+                "right": {
+                    "title": "Excelente! Acertei mais uma vez!",
+                    "description": "Adorei jogar com você!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "Você me venceu!"
+                }
+            }
+        }
+    },
+    "ru": {
+        "code": "ru",
+        "emoji": "🇷🇺",
+        "name": "Russian",
+        "native": "Русский",
+        "texts": {
+            "correct": "Исправить",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Вопрос",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "es": {
+        "code": "es",
+        "emoji": "🇪🇸",
+        "name": "Spanish",
+        "native": "Español",
+        "texts": {
+            "correct": "Corregir",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Pregunta",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    },
+    "tr": {
+        "code": "tr",
+        "emoji": "🇹🇷",
+        "name": "Turkish",
+        "native": "Türk",
+        "texts": {
+            "correct": "Düzelt",
+            "yes": "Yes",
+            "no": "No",
+            "question": "Soru",
+            "guess": {
+                "question": "Is this your character?",
+                "ranked": "Ranked",
+                "right": {
+                    "title": "Great! Guessed right one more time.",
+                    "description": "I love playing with you!"
+                },
+                "wrong": {
+                    "title": "Bravo, {username}!",
+                    "description": "You have defeated me!"
+                }
+            }
+        }
+    }
+}
