@@ -5,7 +5,7 @@ Esse é um bot feito em TypeScript usando Discord.JS-dev e as interactions do Di
 O bot responde o comando /akinator (nativo no Discord)
 com algumas perguntas. Responda as perguntas até achar seu personagem.
 Para responder as perguntas, clique nos botões Sim, Não, Não sei, Provavelmente Sim, Provavelmente Não.
-Para desfazer uma resposta, clique em Voltar (botão vermelho).
+Para desfazer uma resposta, clique em Corrigir (botão vermelho).
 
 ## Comandos
 
