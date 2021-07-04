@@ -1,22 +1,24 @@
 import { CommandInteraction, MessageButton, MessageComponentInteraction, MessageEmbed } from 'discord.js'
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
-import { sliceIntoChunks } from '../utils/array'
 import { promisify } from 'util'
+import { sliceIntoChunks, progressBar } from 'utils'
 
 const sleep = promisify(setTimeout)
 
 export const name = 'akinator'
 export const description = 'Play Akinator'
 export async function run(bot: Bot, interaction: CommandInteraction) {
-    let game = new Aki('pt')
     const embed = new MessageEmbed().setColor('YELLOW')
-    const progressBar = (p: number, l: number = 30) => {
-        let filled = Math.floor((p * 30) / 100)
-        let rest = 30 - filled
-
-        return Number(p.toFixed(2)) + '% ' + '█'.repeat(filled) + '░'.repeat(rest)
-    }
+    const successEmbed = new MessageEmbed()
+        .setTitle('Excelente! Acertei mais uma vez!')
+        .setDescription('Adorei jogar com você!')
+        .setColor('GREEN')
+    const failEmbed = new MessageEmbed()
+        .setTitle(`Bravo, ${interaction.user.username}!`)
+        .setDescription('Você me venceu!')
+        .setColor('RED')
+    const game = new Aki('pt')
 
     interaction.defer()
 
@@ -46,14 +48,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             await game.step(i.customID)
 
         if (game.currentStep >= 78 && i.customID === 'continue') {
-            interaction.editReply({ content: null, embeds: [
-                embed, 
-                new MessageEmbed()
-                    .setTitle(`Bravo, ${interaction.user.username}!`)
-                    .setDescription('Você me venceu!')
-                    .setColor('RED')
-                ], components: []
-            })
+            interaction.editReply({ content: null, embeds: [ embed, failEmbed ], components: [] })
 
             collector.stop()
             return
@@ -61,21 +56,14 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
         if (game.progress >= 70 && i.customID !== 'continue') {
             if (i.customID === 'win') {
-                interaction.editReply({ content: null, embeds: [
-                    embed, 
-                    new MessageEmbed()
-                        .setTitle('Excelente! Acertei mais uma vez!')
-                        .setDescription('Adorei jogar com você!')
-                        .setColor('GREEN')
-                    ], components: []
-                })
+                interaction.editReply({ content: null, embeds: [ embed, successEmbed ], components: [] })
 
                 return
             }
 
             await game.win()
             i.editReply({ content: ':thinking:', embeds: [], components: [] })
-            await sleep(2000)
+            await sleep(3000)
 
             let [answer] = game.answers
 
@@ -85,10 +73,10 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             embed.setImage(answer.absolute_picture_path)
 
             let buttons = [
-                { customID: 'win', label: 'Sim', style: 'PRIMARY' },
-                { customID: 'continue', label: 'Não', style: 'PRIMARY' },
-                { customID: 'back', label: 'Voltar', style: 'DANGER' },
-            ].map((label: any) => new MessageButton(label))
+                new MessageButton({ customID: 'win', label: 'Sim', style: 'PRIMARY' }),
+                new MessageButton({ customID: 'continue', label: 'Não', style: 'PRIMARY' }),
+                new MessageButton({ customID: 'back', label: 'Voltar', style: 'DANGER' }),
+            ]
 
             interaction.editReply({ content: null, embeds: [embed], components: [buttons] })
 
