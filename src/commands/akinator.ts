@@ -50,14 +50,14 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     embed.setDescription(game.question)
     embed.setFooter(progressBar(game.progress, 20))
 
+    if (game.currentStep > 0) buttons[1][2].setDisabled(false)
+    else buttons[1][2].setDisabled(true)
+
     const message = await interaction.editReply({ embeds: [embed], components: buttons })
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id && i.message.id === message.id
 
     const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
-
-    if (game.currentStep > 0) buttons[1][2].setDisabled(false)
-    else buttons[1][2].setDisabled(true)
 
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         await i.deferUpdate()

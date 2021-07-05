@@ -60,6 +60,8 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         if (message && message.length > 2000) message = 'Mensagem muito longa, veja o console'
         else message = `${type}${inspect(message)}`
 
+        if (interaction.replied) return
+
         interaction.reply({
             content: Formatters.codeBlock('js', message),
             ephemeral: true,

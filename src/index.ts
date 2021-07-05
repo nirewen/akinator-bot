@@ -33,18 +33,16 @@ export class Bot extends Discord.Client {
     async initCommands() {
         if (!bot.application?.owner) await bot.application?.fetch()
 
+        await bot.application?.commands.fetch()
+
         const commands = fs.readdirSync(path.join(__dirname, 'commands'))
 
         for (let file of commands) {
             let { permissions, ...command }: Command = require(path.join(__dirname, 'commands', file))
             let cmd: ApplicationCommand
 
-            if (process.argv.includes('--deploy')) {
-                cmd = await bot.application?.commands.create(command)!
-            } else {
-                await bot.application?.commands.fetch()
-                cmd = bot.application?.commands.cache.find(c => c.name === command.name)!
-            }
+            if (process.argv.includes('--deploy')) cmd = await bot.application?.commands.create(command)!
+            else cmd = bot.application?.commands.cache.find(c => c.name === command.name)!
 
             if (permissions)
                 bot.guilds.cache.forEach(async guild => {
