@@ -1,4 +1,4 @@
 node_modules/
 build/
 .env
-src/db.json
+db.json
