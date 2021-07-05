@@ -140,7 +140,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     collector?.on('end', (_, reason) => {
         if (reason === 'idle' && game.progress < 70) {
-            interaction.editReply({ content: 'This interaction was timed out', embeds: [], components: [] })
+            interaction.editReply({ content: 'This interaction has timed out', embeds: [], components: [] })
         } else {
             interaction.editReply({ content: null, embeds: [embed], components: [] })
         }
