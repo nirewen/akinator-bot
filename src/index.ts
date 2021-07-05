@@ -31,8 +31,6 @@ export class Bot extends Discord.Client {
     async initCommands() {
         if (!bot.application?.owner) await bot.application?.fetch()
 
-        bot.application?.commands.set([])
-
         const commands = fs.readdirSync(path.join(__dirname, 'commands'))
 
         for (let file of commands) {
