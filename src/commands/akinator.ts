@@ -62,10 +62,12 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         if (i.customID === 'win') {
             interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
 
+            collector.stop()
+
             return
         }
 
-        if ((game.progress >= 80 || game.currentStep >= 78) && i.customID === 'continue') {
+        if (i.customID === 'stop') {
             let thoughtsEmbeds = game.answers.map(answer =>
                 new MessageEmbed()
                     .setDescription(
@@ -112,7 +114,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
             let buttons = [
                 new MessageButton({ customID: 'win', label: lang.texts.yes, style: 'PRIMARY', emoji: '861383283321733161' }),
-                new MessageButton({ customID: 'continue', label: lang.texts.no, style: 'PRIMARY', emoji: '861383283015417877' }),
+                new MessageButton({ customID: 'stop', label: lang.texts.no, style: 'PRIMARY', emoji: '861383283015417877' }),
                 new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
             ]
 
@@ -139,6 +141,8 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     collector?.on('end', (_, reason) => {
         if (reason === 'idle' && game.progress < 70) {
             interaction.editReply({ content: 'This interaction was timed out', embeds: [], components: [] })
+        } else {
+            interaction.editReply({ content: null, embeds: [embed], components: [] })
         }
     })
 }
