@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Discord, { ApplicationCommandResolvable, User } from 'discord.js'
+import Discord, { ApplicationCommand, ApplicationCommandResolvable, User } from 'discord.js'
 import dotenv from 'dotenv'
 import JSONdb from 'simple-json-db'
 import { Command } from 'types/Command'
@@ -37,8 +37,14 @@ export class Bot extends Discord.Client {
 
         for (let file of commands) {
             let { permissions, ...command }: Command = require(path.join(__dirname, 'commands', file))
+            let cmd: ApplicationCommand
 
-            let cmd = await bot.application?.commands.create(command)
+            if (process.argv.includes('--deploy')) {
+                cmd = await bot.application?.commands.create(command)!
+            } else {
+                await bot.application?.commands.fetch()
+                cmd = bot.application?.commands.cache.find(c => c.name === command.name)!
+            }
 
             if (permissions)
                 bot.guilds.cache.forEach(async guild => {
