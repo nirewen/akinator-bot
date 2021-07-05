@@ -11,7 +11,7 @@ dotenv.config()
 
 export class Bot extends Discord.Client {
     commands = new Map()
-    db = new JSONdb(path.join(__dirname, 'db.json'))
+    db = new JSONdb(path.join(__dirname, '..', 'db.json'))
 
     constructor() {
         super({
