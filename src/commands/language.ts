@@ -6,6 +6,7 @@ import {
     MessageSelectOptionData,
 } from 'discord.js'
 import { Bot } from 'index'
+import Language from 'types/Language'
 import languages from '../data/languages.json'
 
 export const name = 'language'
@@ -29,19 +30,31 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         emoji: '861403802154565642',
     })
 
-    await interaction.reply({ content: 'Select a language', components: [[select, cancel]], ephemeral: true })
+    await interaction.reply({ content: 'Select a language', components: [[select], [cancel]], ephemeral: true })
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id
 
-    interaction.channel?.awaitMessageComponent({ filter, time: 15000 }).then((i: any) => {
-        let lang = i.values.join(', ')
-        let selected: { emoji: string; name: string; native: string } = (languages as any)[lang]
+    const collector = interaction.channel?.createMessageComponentCollector({ filter, time: 15000 })
 
-        interaction.editReply({
-            content: `Set language to ${selected.emoji} ${selected.name} - ${selected.native}`,
-            components: [],
-        })
+    collector?.on('collect', (i: MessageComponentInteraction) => {
+        if (i.customID === 'lang') {
+            // @ts-ignore: Unknown value
+            let lang = i.values.join('_')
+            let selected: Language = (languages as any)[lang]
 
-        bot.db.set(interaction.user.id, lang)
+            interaction.editReply({
+                content: `Set language to ${selected.emoji} ${selected.name} - ${selected.native}`,
+                components: [],
+            })
+
+            bot.db.set(interaction.user.id, lang)
+        } else if (i.customID === 'cancel') {
+            let lang = bot.getLanguage(interaction.user)
+
+            interaction.editReply({
+                content: `Language not changed. You're still using ${lang.emoji} ${lang.name} - ${lang.native}`,
+                components: [],
+            })
+        }
     })
 }
