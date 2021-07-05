@@ -2,7 +2,6 @@ import { CommandInteraction, MessageButton, MessageComponentInteraction, Message
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
-import Language from 'types/Language'
 
 const sleep = promisify(setTimeout)
 
@@ -60,8 +59,6 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
 
     collector?.on('collect', async (i: MessageComponentInteraction) => {
-        await i.deferUpdate()
-
         if (i.customID === 'win') {
             interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
 
@@ -82,6 +79,18 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             collector.stop()
             return
         }
+
+        interaction.editReply({
+            embeds: [embed],
+            components: buttons.map(row => {
+                if (row.find(b => b.customID === i.customID))
+                    row.find(b => b.customID === i.customID && b.customID !== 'back')?.setStyle('SECONDARY')
+
+                return row
+            }),
+        })
+
+        await i.deferUpdate()
 
         if (i.customID === 'back') await game.back()
         else await game.step(i.customID)
@@ -117,7 +126,14 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         embed.setImage('')
         embed.setFooter(progressBar(Number(game.progress), 20))
 
-        await i.editReply({ embeds: [embed], components: buttons })
+        await i.editReply({
+            embeds: [embed],
+            components: buttons.map(row => {
+                if (row.find(b => b.style === 'SECONDARY')) row.find(b => b.style === 'SECONDARY')?.setStyle('PRIMARY')
+
+                return row
+            }),
+        })
     })
 
     collector?.on('end', (_, reason) => {
