@@ -29,32 +29,50 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         style: 'DANGER',
         emoji: '861403802154565642',
     })
+    const undo = new MessageButton({
+        customID: 'undo',
+        label: 'Undo',
+        style: 'DANGER',
+        emoji: '861383281940758528',
+    })
 
     await interaction.reply({ content: 'Select a language', components: [[select], [cancel]], ephemeral: true })
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id
 
-    const collector = interaction.channel?.createMessageComponentCollector({ filter, time: 15000 })
+    const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
 
-    collector?.on('collect', (i: MessageComponentInteraction) => {
+    collector?.on('collect', async (i: MessageComponentInteraction) => {
+        await i.deferUpdate()
+
         if (i.customID === 'lang') {
             // @ts-ignore: Unknown value
-            let lang = i.values.join('_')
-            let selected: Language = (languages as any)[lang]
+            let selected = i.values.join('_')
+            let language: Language = (languages as any)[selected]
 
-            interaction.editReply({
-                content: `Set language to ${selected.emoji} ${selected.name} - ${selected.native}`,
-                components: [],
+            i.editReply({
+                content: `Set language to ${language.emoji} ${language.name} - ${language.native}`,
+                components: [[undo]],
             })
 
-            bot.db.set(interaction.user.id, lang)
-        } else if (i.customID === 'cancel') {
-            let lang = bot.getLanguage(interaction.user)
+            bot.db.set(interaction.user.id, language.code as any)
+        }
 
-            interaction.editReply({
+        if (i.customID === 'cancel') {
+            i.editReply({
                 content: `Language not changed. You're still using ${lang.emoji} ${lang.name} - ${lang.native}`,
-                components: [],
+                components: [[undo]],
             })
         }
+
+        if (i.customID === 'undo') {
+            i.editReply({ content: 'Select a language', components: [[select], [cancel]] })
+
+            bot.db.set(interaction.user.id, lang.code as any)
+        }
+    })
+
+    collector?.on('end', (_, reason) => {
+        if (reason === 'idle') interaction.editReply({ components: [] })
     })
 }
