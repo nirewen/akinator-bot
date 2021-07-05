@@ -2,7 +2,7 @@ import { CommandInteraction, MessageButton, MessageComponentInteraction, Message
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
-import languages from 'data/languages.json'
+import languages from '../data/languages.json'
 import Language from 'types/Language'
 
 const sleep = promisify(setTimeout)
