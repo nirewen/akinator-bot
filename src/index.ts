@@ -1,9 +1,11 @@
 import fs from 'fs'
 import path from 'path'
-import Discord, { ApplicationCommandResolvable } from 'discord.js'
+import Discord, { ApplicationCommandResolvable, User } from 'discord.js'
 import dotenv from 'dotenv'
 import JSONdb from 'simple-json-db'
 import { Command } from 'types/Command'
+import Language from 'types/Language'
+import languages from './data/languages.json'
 
 dotenv.config()
 
@@ -49,6 +51,13 @@ export class Bot extends Discord.Client {
 
             this.commands.set(command.name, command)
         }
+    }
+
+    getLanguage(user: User) {
+        let userLang = (this.db.get(user.id) as any) || 'pt'
+        let langs = languages as { [key: string]: Language }
+
+        return langs[userLang]
     }
 
     async login() {

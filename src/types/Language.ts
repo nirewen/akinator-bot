@@ -5,6 +5,7 @@ export default interface Language {
     native: string
     texts: {
         correct: string
+        cancel: string
         yes: string
         no: string
         question: string

@@ -2,7 +2,6 @@ import { CommandInteraction, MessageButton, MessageComponentInteraction, Message
 import { Bot } from 'index'
 import { Aki } from 'aki-api'
 import { promisify } from 'util'
-import languages from '../data/languages.json'
 import Language from 'types/Language'
 
 const sleep = promisify(setTimeout)
@@ -17,9 +16,7 @@ const progressBar = (p: number, l: number = 30) => {
 export const name = 'akinator'
 export const description = 'Play Akinator'
 export async function run(bot: Bot, interaction: CommandInteraction) {
-    const lang: Language = (languages as { [key: string]: Language })[
-        (bot.db.get(interaction.user.id) as string | undefined) || 'pt'
-    ]
+    const lang = bot.getLanguage(interaction.user)
 
     const embed = new MessageEmbed().setColor('YELLOW')
     const successEmbed = new MessageEmbed()

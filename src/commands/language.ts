@@ -1,21 +1,30 @@
-import { CommandInteraction, MessageComponentInteraction, MessageSelectMenu } from 'discord.js'
+import { CommandInteraction, MessageButton, MessageComponentInteraction, MessageSelectMenu } from 'discord.js'
 import { Bot } from 'index'
+import Language from 'types/Language'
 import languages from '../data/languages.json'
 
 export const name = 'language'
 export const description = 'Sets the language of the game for the user'
 export async function run(bot: Bot, interaction: CommandInteraction) {
-    const buttons = new MessageSelectMenu()
-        .setCustomID('lang')
-        .setPlaceholder('Nothing selected')
-        .addOptions(
-            Object.entries(languages).map(([id, lang]) => ({
-                value: id,
-                label: `${lang.emoji} ${lang.name} - ${lang.native}`,
-            }))
-        )
+    const lang = bot.getLanguage(interaction.user)
 
-    await interaction.reply({ content: 'Select a language', components: [[buttons]], ephemeral: true })
+    const options: { value: string; label: string }[] = Object.entries(languages).map(([id, lang]) => ({
+        value: id,
+        label: `${lang.emoji} ${lang.name} - ${lang.native}`,
+    }))
+    const select = new MessageSelectMenu({
+        customID: 'lang',
+        placeholder: options.find(option => option.value === lang.code)?.label,
+        options,
+    })
+    const cancel = new MessageButton({
+        customID: 'cancel',
+        label: lang.texts.cancel,
+        style: 'DANGER',
+        emoji: '861403802154565642',
+    })
+
+    await interaction.reply({ content: 'Select a language', components: [[select, cancel]], ephemeral: true })
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id
 

@@ -6,6 +6,7 @@
         "native": "العربية",
         "texts": {
             "correct": "تعديل الإجابة",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "السؤال رقم",
@@ -30,6 +31,7 @@
         "native": "中文",
         "texts": {
             "correct": "正确",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "问题",
@@ -54,6 +56,7 @@
         "native": "Nederlands",
         "texts": {
             "correct": "Corrigeer",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Vraag",
@@ -78,6 +81,7 @@
         "native": "English",
         "texts": {
             "correct": "Correct",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Question",
@@ -102,6 +106,7 @@
         "native": "Français",
         "texts": {
             "correct": "Corriger",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Question",
@@ -126,6 +131,7 @@
         "native": "Deutsch",
         "texts": {
             "correct": "Verbessern",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Frage",
@@ -150,6 +156,7 @@
         "native": "עברית",
         "texts": {
             "correct": "תיקון",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "שאלה",
@@ -174,6 +181,7 @@
         "native": "Italiano",
         "texts": {
             "correct": "Correggi",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Domanda",
@@ -198,6 +206,7 @@
         "native": "日本",
         "texts": {
             "correct": "修正する",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "質問",
@@ -222,6 +231,7 @@
         "native": "한국어",
         "texts": {
             "correct": "이전 질문",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "질문",
@@ -246,6 +256,7 @@
         "native": "Polski",
         "texts": {
             "correct": "Popraw",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Pytanie",
@@ -270,6 +281,7 @@
         "native": "Português",
         "texts": {
             "correct": "Corrigir",
+            "cancel": "Cancelar",
             "yes": "Sim",
             "no": "Não",
             "question": "Pergunta",
@@ -294,6 +306,7 @@
         "native": "Русский",
         "texts": {
             "correct": "Исправить",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Вопрос",
@@ -318,6 +331,7 @@
         "native": "Español",
         "texts": {
             "correct": "Corregir",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Pregunta",
@@ -342,6 +356,7 @@
         "native": "Türk",
         "texts": {
             "correct": "Düzelt",
+            "cancel": "Cancel",
             "yes": "Yes",
             "no": "No",
             "question": "Soru",
