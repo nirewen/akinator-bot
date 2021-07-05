@@ -1,6 +1,11 @@
-import { CommandInteraction, MessageButton, MessageComponentInteraction, MessageSelectMenu } from 'discord.js'
+import {
+    CommandInteraction,
+    MessageButton,
+    MessageComponentInteraction,
+    MessageSelectMenu,
+    MessageSelectOptionData,
+} from 'discord.js'
 import { Bot } from 'index'
-import Language from 'types/Language'
 import languages from '../data/languages.json'
 
 export const name = 'language'
@@ -8,7 +13,7 @@ export const description = 'Sets the language of the game for the user'
 export async function run(bot: Bot, interaction: CommandInteraction) {
     const lang = bot.getLanguage(interaction.user)
 
-    const options: { value: string; label: string }[] = Object.entries(languages).map(([id, lang]) => ({
+    const options: MessageSelectOptionData[] = Object.entries(languages).map(([id, lang]) => ({
         value: id,
         label: `${lang.emoji} ${lang.name} - ${lang.native}`,
     }))
