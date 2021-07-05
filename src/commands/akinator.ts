@@ -56,7 +56,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id && i.message.id === message.id
 
-    const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 30e3 })
+    const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 120e3 })
 
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         if (i.customID === 'win') {
