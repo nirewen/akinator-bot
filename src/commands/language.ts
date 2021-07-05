@@ -73,6 +73,6 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     })
 
     collector?.on('end', (_, reason) => {
-        if (reason === 'idle') interaction.editReply({ components: [] })
+        if (reason === 'idle') interaction.editReply({ content: 'This interaction has timed out', components: [] })
     })
 }
