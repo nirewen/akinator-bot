@@ -62,6 +62,12 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         await i.deferUpdate()
 
+        if (i.customID === 'win') {
+            interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
+
+            return
+        }
+
         if ((game.progress >= 80 || game.currentStep >= 78) && i.customID === 'continue') {
             let thoughtsEmbeds = game.answers.map(answer =>
                 new MessageEmbed()
@@ -71,7 +77,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
                     .setThumbnail(answer.absolute_picture_path)
                     .setColor('YELLOW')
             )
-            interaction.editReply({ content: null, embeds: [failEmbed, ...thoughtsEmbeds], components: [] })
+            interaction.editReply({ content: null, embeds: [failEmbed, ...thoughtsEmbeds.slice(0, 9)], components: [] })
 
             collector.stop()
             return
@@ -84,12 +90,6 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         else buttons[1][2].setDisabled(true)
 
         if (game.progress >= 80 && i.customID !== 'continue') {
-            if (i.customID === 'win') {
-                interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
-
-                return
-            }
-
             await game.win()
             i.editReply({ content: ':thinking:', embeds: [], components: [] })
             await sleep(3000)
