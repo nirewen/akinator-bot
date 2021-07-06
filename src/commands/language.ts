@@ -19,18 +19,18 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         label: `${lang.emoji} ${lang.name} - ${lang.native}`,
     }))
     const select = new MessageSelectMenu({
-        customID: 'lang',
+        customId: 'lang',
         placeholder: options.find(option => option.value === lang.code)?.label,
         options,
     })
     const cancel = new MessageButton({
-        customID: 'cancel',
+        customId: 'cancel',
         label: lang.texts.cancel,
         style: 'DANGER',
         emoji: '861403802154565642',
     })
     const undo = new MessageButton({
-        customID: 'undo',
+        customId: 'undo',
         label: 'Undo',
         style: 'DANGER',
         emoji: '861383281940758528',
@@ -45,7 +45,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     collector?.on('collect', async (i: MessageComponentInteraction) => {
         await i.deferUpdate()
 
-        if (i.customID === 'lang') {
+        if (i.customId === 'lang') {
             // @ts-ignore: Unknown value
             let selected = i.values.join('_')
             let language: Language = (languages as any)[selected]
@@ -58,14 +58,14 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             bot.db.set(interaction.user.id, language.code as any)
         }
 
-        if (i.customID === 'cancel') {
+        if (i.customId === 'cancel') {
             i.editReply({
                 content: `Language not changed. You're still using ${lang.emoji} ${lang.name} - ${lang.native}`,
                 components: [[undo]],
             })
         }
 
-        if (i.customID === 'undo') {
+        if (i.customId === 'undo') {
             i.editReply({ content: 'Select a language', components: [[select], [cancel]] })
 
             bot.db.set(interaction.user.id, lang.code as any)

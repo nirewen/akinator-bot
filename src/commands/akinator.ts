@@ -34,14 +34,14 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
     let buttons = [
         [
-            new MessageButton({ customID: '0', label: game.answers[0], style: 'PRIMARY', emoji: '861383283321733161' }),
-            new MessageButton({ customID: '1', label: game.answers[1], style: 'PRIMARY', emoji: '861383283015417877' }),
-            new MessageButton({ customID: '3', label: game.answers[3], style: 'PRIMARY', emoji: '861383283144654938' }),
+            new MessageButton({ customId: '0', label: game.answers[0], style: 'PRIMARY', emoji: '861383283321733161' }),
+            new MessageButton({ customId: '1', label: game.answers[1], style: 'PRIMARY', emoji: '861383283015417877' }),
+            new MessageButton({ customId: '3', label: game.answers[3], style: 'PRIMARY', emoji: '861383283144654938' }),
         ],
         [
-            new MessageButton({ customID: '2', label: game.answers[2], style: 'PRIMARY', emoji: '861383282981339167' }),
-            new MessageButton({ customID: '4', label: game.answers[4], style: 'PRIMARY', emoji: '861383283110838273' }),
-            new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
+            new MessageButton({ customId: '2', label: game.answers[2], style: 'PRIMARY', emoji: '861383282981339167' }),
+            new MessageButton({ customId: '4', label: game.answers[4], style: 'PRIMARY', emoji: '861383283110838273' }),
+            new MessageButton({ customId: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
         ],
     ]
 
@@ -59,7 +59,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     const collector = interaction.channel?.createMessageComponentCollector({ filter, idle: 120e3 })
 
     collector?.on('collect', async (i: MessageComponentInteraction) => {
-        if (i.customID === 'win') {
+        if (i.customId === 'win') {
             interaction.editReply({ content: null, embeds: [embed, successEmbed], components: [] })
 
             collector.stop()
@@ -67,7 +67,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             return
         }
 
-        if (i.customID === 'stop') {
+        if (i.customId === 'stop') {
             let thoughtsEmbeds = game.answers.map(answer =>
                 new MessageEmbed()
                     .setDescription(
@@ -86,8 +86,8 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         interaction.editReply({
             embeds: [embed],
             components: buttons.map(row => {
-                if (row.find(b => b.customID === i.customID))
-                    row.find(b => b.customID === i.customID && b.customID !== 'back')?.setStyle('SECONDARY')
+                if (row.find(b => b.customId === i.customId))
+                    row.find(b => b.customId === i.customId && b.customId !== 'back')?.setStyle('SECONDARY')
 
                 return row
             }),
@@ -95,13 +95,13 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
 
         await i.deferUpdate()
 
-        if (i.customID === 'back') await game.back()
-        else await game.step(i.customID)
+        if (i.customId === 'back') await game.back()
+        else await game.step(i.customId)
 
         if (game.currentStep > 0) buttons[1][2].setDisabled(false)
         else buttons[1][2].setDisabled(true)
 
-        if (game.progress >= 70 && i.customID !== 'stop') {
+        if (game.progress >= 70 && i.customId !== 'stop') {
             await game.win()
             i.editReply({ content: ':thinking:', embeds: [], components: [] })
             await sleep(3000)
@@ -114,9 +114,9 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             embed.setImage(answer.absolute_picture_path)
 
             let buttons = [
-                new MessageButton({ customID: 'win', label: lang.texts.yes, style: 'PRIMARY', emoji: '861383283321733161' }),
-                new MessageButton({ customID: 'stop', label: lang.texts.no, style: 'PRIMARY', emoji: '861383283015417877' }),
-                new MessageButton({ customID: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
+                new MessageButton({ customId: 'win', label: lang.texts.yes, style: 'PRIMARY', emoji: '861383283321733161' }),
+                new MessageButton({ customId: 'stop', label: lang.texts.no, style: 'PRIMARY', emoji: '861383283015417877' }),
+                new MessageButton({ customId: 'back', label: lang.texts.correct, style: 'DANGER', emoji: '861383281940758528' }),
             ]
 
             interaction.editReply({ content: null, embeds: [embed], components: [buttons] })
