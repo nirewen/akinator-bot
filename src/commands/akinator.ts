@@ -79,6 +79,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
             interaction.editReply({ content: null, embeds: [failEmbed, ...thoughtsEmbeds.slice(0, 9)], components: [] })
 
             collector.stop()
+
             return
         }
 
@@ -100,7 +101,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         if (game.currentStep > 0) buttons[1][2].setDisabled(false)
         else buttons[1][2].setDisabled(true)
 
-        if (game.progress >= 80 && i.customID !== 'continue') {
+        if (game.progress >= 70 && i.customID !== 'stop') {
             await game.win()
             i.editReply({ content: ':thinking:', embeds: [], components: [] })
             await sleep(3000)
@@ -141,8 +142,6 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
     collector?.on('end', (_, reason) => {
         if (reason === 'idle' && game.progress < 70) {
             interaction.editReply({ content: 'This interaction has timed out', embeds: [], components: [] })
-        } else {
-            interaction.editReply({ content: null, embeds: [embed], components: [] })
         }
     })
 }
