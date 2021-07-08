@@ -35,17 +35,6 @@ export async function run(this: Bot, interaction: CommandInteraction) {
             return collector.stop()
         }
 
-        interaction.editReply({
-            embeds: [game.question],
-            components: game.answers.map(row => {
-                const button = row.find(b => b.customId === i.customId && i.customId !== 'back')
-
-                if (button) button.setStyle('SUCCESS')
-
-                return row
-            }),
-        })
-
         await i.deferUpdate()
 
         if (i.customId === 'back') await game.correct()
