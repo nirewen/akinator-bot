@@ -1,5 +1,5 @@
 import { ApplicationCommandPermissionData, CommandInteraction, Formatters } from 'discord.js'
-import { Bot } from 'index'
+import Bot from 'structures/Bot'
 import util from 'util'
 
 util.inspect.colors.light_blue = [94, 39]
@@ -36,7 +36,7 @@ export const permissions: ApplicationCommandPermissionData[] = [
         permission: true,
     },
 ]
-export async function run(bot: Bot, interaction: CommandInteraction) {
+export async function run(this: Bot, interaction: CommandInteraction) {
     let { value: suffix }: any = interaction.options.get('code')
 
     let code = suffix?.replace(/^\u0060\u0060\u0060(js|javascript ?\n)?|\u0060\u0060\u0060$/g, '')

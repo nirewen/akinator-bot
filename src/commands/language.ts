@@ -5,22 +5,24 @@ import {
     MessageSelectMenu,
     MessageSelectOptionData,
 } from 'discord.js'
-import { Bot } from 'index'
+import Bot from 'structures/Bot'
 import Language from 'types/Language'
 import languages from '../data/languages.json'
 
 export const name = 'language'
 export const description = 'Sets the language of the game for the user'
-export async function run(bot: Bot, interaction: CommandInteraction) {
-    const lang = bot.getLanguage(interaction.user)
+export async function run(this: Bot, interaction: CommandInteraction) {
+    const lang = this.getLanguage(interaction.user)
 
     const options: MessageSelectOptionData[] = Object.entries(languages).map(([id, lang]) => ({
         value: id,
-        label: `${lang.emoji} ${lang.name} - ${lang.native}`,
+        label: lang.name,
+        emoji: lang.emoji,
+        description: lang.native,
     }))
     const select = new MessageSelectMenu({
         customId: 'lang',
-        placeholder: options.find(option => option.value === lang.code)?.label,
+        placeholder: 'Nothing selected',
         options,
     })
     const cancel = new MessageButton({
@@ -36,7 +38,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         emoji: '861383281940758528',
     })
 
-    await interaction.reply({ content: 'Select a language', components: [[select], [cancel]], ephemeral: true })
+    await interaction.reply({ content: 'Select a language:', components: [[select], [cancel]], ephemeral: true })
 
     const filter = (i: MessageComponentInteraction) => i.user.id === interaction.user.id
 
@@ -55,7 +57,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
                 components: [[undo]],
             })
 
-            bot.db.set(interaction.user.id, language.code as any)
+            this.db.set(interaction.user.id, language.code as any)
         }
 
         if (i.customId === 'cancel') {
@@ -68,7 +70,7 @@ export async function run(bot: Bot, interaction: CommandInteraction) {
         if (i.customId === 'undo') {
             i.editReply({ content: 'Select a language', components: [[select], [cancel]] })
 
-            bot.db.set(interaction.user.id, lang.code as any)
+            this.db.set(interaction.user.id, lang.code as any)
         }
     })
 

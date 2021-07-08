@@ -11,14 +11,14 @@
             "no": "No",
             "question": "السؤال رقم",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -36,14 +36,14 @@
             "no": "No",
             "question": "问题",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -61,14 +61,14 @@
             "no": "No",
             "question": "Vraag",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -86,14 +86,14 @@
             "no": "No",
             "question": "Question",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -111,14 +111,14 @@
             "no": "No",
             "question": "Question",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -136,14 +136,14 @@
             "no": "No",
             "question": "Frage",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -161,14 +161,14 @@
             "no": "No",
             "question": "שאלה",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -186,14 +186,14 @@
             "no": "No",
             "question": "Domanda",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -211,14 +211,14 @@
             "no": "No",
             "question": "質問",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -236,14 +236,14 @@
             "no": "No",
             "question": "질문",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -261,14 +261,14 @@
             "no": "No",
             "question": "Pytanie",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -286,14 +286,14 @@
             "no": "Não",
             "question": "Pergunta",
             "guess": {
-                "question": "Esse é o seu personagem?",
+                "question": "Eu acho que",
                 "ranked": "Classificado",
                 "right": {
                     "title": "Excelente! Acertei mais uma vez!",
                     "description": "Adorei jogar com você!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "Você me venceu!"
                 }
             }
@@ -311,14 +311,14 @@
             "no": "No",
             "question": "Вопрос",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -336,14 +336,14 @@
             "no": "No",
             "question": "Pregunta",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }
@@ -361,14 +361,14 @@
             "no": "No",
             "question": "Soru",
             "guess": {
-                "question": "Is this your character?",
+                "question": "I think of",
                 "ranked": "Ranked",
                 "right": {
                     "title": "Great! Guessed right one more time.",
                     "description": "I love playing with you!"
                 },
                 "wrong": {
-                    "title": "Bravo, {username}!",
+                    "title": "Bravo!",
                     "description": "You have defeated me!"
                 }
             }

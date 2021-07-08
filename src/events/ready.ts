@@ -1,7 +1,7 @@
-import { Bot } from 'index'
+import Bot from 'structures/Bot'
 
-export default function (bot: Bot) {
-    console.log('pronto')
+export function run(this: Bot) {
+    let guilds = this.guilds.cache.size
 
-    bot.initCommands()
+    this.logger.logWithHeader('PRONTO', 'green', 'white', `SERVERS: ${guilds}`)
 }
